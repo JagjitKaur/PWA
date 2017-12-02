@@ -1,28 +1,90 @@
-.App {
+.App,#root {
   text-align: center;
+  height:inherit;
+  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+html,body{
+	height: 100% !important;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #455561;
+  height: 50px;
   padding: 20px;
   color: white;
 }
 
 .App-title {
   font-size: 1.5em;
+  float:left;
 }
 
 .App-intro {
   font-size: large;
 }
+input[type="file" i] {
+  display: inline-block;
+    width: 50%;
+    padding: 4em 0 0 0;
+    height: 20px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url(upload.PNG) center center no-repeat #e4e4e4;
+    border-radius: 10px;
+    background-size: cover;
+	outline:none;
+}
+input{
+	//visibility:hidden;
+}
+.App-gallery-container{
+	float:right;
+}
+#photos {
+  /* Prevent vertical gaps */
+  line-height: 0;
+   
+  -webkit-column-count: 5;
+  -webkit-column-gap:   0px;
+  -moz-column-count:    5;
+  -moz-column-gap:      0px;
+  column-count:         5;
+  column-gap:           0px;  
+}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#photos img {
+  /* Just in case there are inline attributes */
+  width: 100% !important;
+  height: auto !important;
+  margin: 5px 5px 2.5px;
+}
+@media (max-width: 1200px) {
+  #photos {
+  -moz-column-count:    4;
+  -webkit-column-count: 4;
+  column-count:         4;
+  }
+}
+@media (max-width: 1000px) {
+  #photos {
+  -moz-column-count:    3;
+  -webkit-column-count: 3;
+  column-count:         3;
+  }
+}
+@media (max-width: 800px) {
+  #photos {
+  -moz-column-count:    2;
+  -webkit-column-count: 2;
+  column-count:         2;
+  }
+}
+@media (max-width: 400px) {
+  #photos {
+  -moz-column-count:    1;
+  -webkit-column-count: 1;
+  column-count:         1;
+  }
 }
