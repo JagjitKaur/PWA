@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Board from './Board/Board.js';
 import './App.css';
 
 class App extends Component {
@@ -41,7 +40,7 @@ class App extends Component {
                     return <img src={name} alt='test' />;
                   })}
 		</div>
-      <Board/>  
+        
       </div>
     );
   }

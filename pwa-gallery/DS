@@ -1,0 +1,244 @@
+RAm:
+on running code , variables are stored in RAm and not in storage as ram access is faster .There is direct pointer to each memory location.
+
+processor ---> cache ----> memory controller ---> memory locations
+
+when processor tries to access any memory location, memory controller look for it in the memory shelf and while returining back,it returns few consecutive addresses also which are stored in cache .
+
+So if the processor asks for the contents of address 951, then 952, then 953, then 954...it'll go out to RAM once for that first read, and the subsequent reads will come straight from the super-fast cache.
+
+So reading from sequential memory addresses is faster than jumping around.
+
+--------------------------------------------------------------------------
+When is 32 bits not enough? When you're counting views on a viral video. YouTube famously ran into trouble when the Gangnam Style video hit over 2^{32}2
+​32
+​​  views, forcing them to upgrade their view counts from 32-bit to 64-bit integers.
+
+----------------------------------------------------------------------------
+ARRAY , DYNAMIC ARRAY,  LINKED LIST,  HASH MAP	
+Arrays have O(1)O(1)-time lookups. But you need enough uninterrupted space in RAM to store the whole array. And the array items need to be the same size.
+
+But if your array stores pointers to the actual array items (like we did with our list of baby names), you can get around both those weaknesses. You can store each array item wherever there's space in RAM, and the array items can be different sizes. The tradeoff is that now your array is slower because it's not cache-friendly.
+
+Another problem with arrays is you have to specify their sizes ahead of time. There are two ways to get around this: dynamic arrays and linked lists. Linked lists have faster appends and prepends than dynamic arrays, but dynamic arrays have faster lookups.
+
+Fast lookups are really useful, especially if you can look things up not just by indices (0, 1, 2, 3, etc.) but by arbitrary keys ("lies", "foes"...any string). That's what hash tables are for. The only problem with hash tables is they have to deal with hash collisions, which means some lookups could be a bit slow.
+
+Each data structure has tradeoffs. You can't have it all.
+
+So you have to know what's important in the problem you're working on. What does your data structure need to do quickly? Is it lookups by index? Is it appends or prepends?
+
+Once you know what's important, you can pick the data structure that does it best.
+
+----------------------------------------------------------------------------
+Graphs
+g(v,e)
+weighed ---- unweighed --- distance between two cities
+directional(n(n-1)) edges max --- web page urls
+undirectional(n(n-1)/2) edges max -- facebook suggested friends
+dense --- edges close to max number of edges	
+sparse --- edges closed to number of vertices
+
+PATH:
+simple path: vertices and edges not repeated
+walk: both can be repeated
+trail: vertices can be repeated but not edges
+
+ways to implement:
+adjacency matrix : good for dense graphs.
+find if two nodes are connected : o(1)
+find all connected nodes: 0(v)
+where v is number of vertices
+issue: memeory consumptions is v**2
+
+adjacency list:
+good for sparse graphs
+array of an array rather than matrix
+eg: [0][1,2,3]
+	[1][4,5]
+	[2][0,3]
+
+	can be implemented using array of linked lists of bfs within array where array elements denote vertices
+find if two nodes are connected : o(v)
+find all connected nodes: 0(v)
+memory size = total number of vertices
+
+faster than adjacency matrix when we sparse graph like facebook friend hierarchy
+
+----------------------------------------------------------------------------
+function to check if tree is balanced or not
+
+// max height of a tree O(n)
+//min height of a tree  O(n)
+difference should be <=1 -- total 2*O(n)
+
+function height(node){
+   if(!node) return 0;
+   var leftHeight = height(node.left);
+   var rightHeight = height(node.right);
+
+   return Math.max(leftHeight, rightHeight) + 1;
+}
+
+----------------------------------------------------------------------------
+function to form bst with min height from sorted array
+
+
+
+function formBST(arr,start,end){
+	if(start<end){
+	return node;
+	}
+	var mid = Math.floor(start+end/2);			|
+	var node = new Node(arr[mid]);				|
+	BST.push(node);								| complexity here is constant C
+	node.left = formBST(arr,start,mid-1); 		| log(n/2)
+	node.right = formBST(arr,mid+1,end);		| log(n/2)
+}
+
+/**total complexity (log n)+c;**/
+function Node(val){
+	this.value = val;
+	this.left = null;
+	This.right = null;
+}
+
+function BinarySearchTree(){
+	this.root = null;
+}
+
+------------------------------------------------
+function to create linked list at each depth of binary tree
+
+// use level order traversal using queue
+// currentcounter to maintain items in queue
+//level counter to init each depth level
+//level main which shows depth along with vals at that depth
+
+function BFS(node){
+	var level = 0;
+	if(!node){
+		return 0;
+	}
+	var queue = [node];
+	var levelmain = 0;
+	var levelCount = 1;
+	var currentCount = 0;
+while(queue.length>0){
+	var current = queue.shift();
+	if(current.left){
+		currentCount++;
+		queue.push(current.left);
+	}
+	if(current.right){
+		currentCount++;
+		queue.push(current.right);
+	}
+	console.log("level"+ levelmain + " "+current.value);
+	levelCount--;
+	if(levelCount==0){
+		levelCount = currentCount;
+		levelmain++;
+		currentCount = 0;
+		//create new linked list here
+	}
+}
+}
+function Node(val){
+	this.value =val;
+	this.left = null;
+	this.right = null;
+}
+ var root = new Node(9);
+           root.left = new Node(8);    
+           root.right = new Node(7);
+
+           root.left.left = new Node(2);
+           root.left.right = new Node(4);
+
+           root.right.left = new Node(6);
+           root.right.right = new Node(8);
+
+           root.left.left.left = new Node('a');
+           root.left.left.right = new Node('b');
+
+           root.left.right.right = new Node('c');
+BFS(root);
+
+----------------------------------------------------
+function to display in order successor
+1) using in order traversal : but it has complexity of o(n)
+2) O(h) -- height of tree
+
+function findSuccessor(root,node){
+	if(node.right!=null){
+		return getMin(node.right); // get min on right side 
+	}
+	let succ = null;
+	while(root!=null){
+		if(root.value > node.value){
+			succ= root;
+			root= root.left;
+		}
+		else if(root.value < node.value){
+			root= root.right;
+		}
+		else{
+			break;
+		}
+	}
+	return succ;
+}
+function getMin(node){
+	if(!node){
+		return node;
+	}
+	return (node.left);
+}
+findSuccessor(bst1.root,bst1.root.left.right.right)
+
+--------------------------------------------------------
+find lca without using external ds
+
+find root of both values using recursive function which will return once its root is found.
+then if roots are differenr, it will recurse to find parent root...
+complexity: o(n)
+
+
+/ This function returns pointer to LCA of two given values n1 and n2.
+// v1 is set as true by this function if n1 is found
+// v2 is set as true by this function if n2 is found
+struct Node *findLCAUtil(struct Node* root, int n1, int n2, bool &v1, bool &v2)
+{
+    // Base case
+    if (root == NULL) return NULL;
+ 
+    // If either n1 or n2 matches with root's key, report the presence
+    // by setting v1 or v2 as true and return root (Note that if a key
+    // is ancestor of other, then the ancestor key becomes LCA)
+    if (root->key == n1)
+    {
+        v1 = true;
+        return root;
+    }
+    if (root->key == n2)
+    {
+        v2 = true;
+        return root;
+    }
+ 
+    // Look for keys in left and right subtrees
+    Node *left_lca  = findLCAUtil(root->left, n1, n2, v1, v2);
+    Node *right_lca = findLCAUtil(root->right, n1, n2, v1, v2);
+ 
+    // If both of the above calls return Non-NULL, then one key
+    // is present in once subtree and other is present in other,
+    // So this node is the LCA
+    if (left_lca && right_lca)  return root;
+ 
+    // Otherwise check if left subtree or right subtree is LCA
+    return (left_lca != NULL)? left_lca: right_lca;
+}
+
+
+https://code.tutsplus.com/tutorials/top-15-best-practices-for-writing-super-readable-code--net-8118
