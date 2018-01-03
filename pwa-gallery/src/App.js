@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Board from './Board/Board.js';
+import Main from './Main.js';
+import Header from './Header.js';
 import './App.css';
 
 class App extends Component {
@@ -36,12 +37,13 @@ class App extends Component {
 		<input type="file" accept="image/*" capture="camera" onChange={this.handleChange}/>
 		</div>
         </header>
+		  <Header/>
 		<div id="photos">
 		{this.state.imageArray.map(function(name, index){
                     return <img src={name} alt='test' />;
                   })}
 		</div>
-      <Board/>  
+    <Main />  
       </div>
     );
   }

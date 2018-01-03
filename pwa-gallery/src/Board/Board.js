@@ -25,7 +25,7 @@ class Board extends Component {
   createBoard(){
     this.openCreationPanel();
     let existingBoardArray = this.state.boards;
-    if(this.state.name==''){
+    if(this.state.name===''){
       alert("enter board Name"); 
       return;
     }

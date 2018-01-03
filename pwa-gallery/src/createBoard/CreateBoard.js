@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ItemList from '../ItemList/ItemList.js';
 
 class CreateBoard extends Component {
 	constructor(props) {
@@ -9,7 +8,7 @@ class CreateBoard extends Component {
 
   addItemsToList() {
     let itemList = this.state.boardItemList;
-    if(this.state.BoardItemName==''){
+    if(this.state.BoardItemName===''){
       alert("enter details"); 
       return;
     }
