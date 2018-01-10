@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+import Board from './Board/Board.js';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+=======
 import Main from './Main.js';
 import Header from './Header.js';
+>>>>>>> e79168e27d9f7643821a5b6df84364dc6b6a9266
 import './App.css';
 
 class App extends Component {
@@ -43,10 +49,13 @@ class App extends Component {
                     return <img src={name} alt='test' />;
                   })}
 		</div>
+<<<<<<< HEAD
+      <Board/>  
+=======
     <Main />  
+>>>>>>> e79168e27d9f7643821a5b6df84364dc6b6a9266
       </div>
     );
   }
 }
-
-export default App;
+export default DragDropContext(HTML5Backend)(App);

@@ -4,16 +4,13 @@
   background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
 
-.App {
-  height:auto;
-}
 html,body{
 	height: 100% !important;
 }
 
 .App-header {
   background-color: #455561;
-  height: 60px;
+  height: 50px;
   padding: 20px;
   color: white;
 }
